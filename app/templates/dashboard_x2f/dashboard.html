@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>Admin Dashboard</h2>
+        <div class="actions">
+            <a href="{{ url_for('admin.create_article') }}" class="btn">Create Article</a>
+            <a href="{{ url_for('admin.logout') }}" class="btn">Logout</a>
+        </div>
+    </div>
+
+    <div class="articles-list">
+        {% for article in articles %}
+        <div class="article-item">
+            <h3>{{ article.title }}</h3>
+            <div class="article-actions">
+                <a href="{{ url_for('admin.edit_article', article_id=article.id) }}" class="btn">Edit</a>
+                <a href="{{ url_for('admin.delete_article', article_id=article.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .btn {
+        background: #e31e24;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+    .btn-danger {
+        background: #dc3545;
+    }
+    .articles-list {
+        display: grid;
+        gap: 20px;
+    }
+    .article-item {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+{% endblock %} 

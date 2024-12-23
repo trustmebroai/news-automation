@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="news-layout">
+        <!-- Main Article Content -->
+        <div class="main-article">
+            <div class="article-content">
+                <div class="article-meta">
+                    <div class="time">08:58</div>
+                    <div class="category">Entertainment</div>
+                </div>
+                <!-- Article content - Use safe filter to render HTML -->
+                {{ content|safe }}
+            </div>
+        </div>
+
+        <!-- Side Articles -->
+        <div class="side-articles">
+            {% for other_article in other_articles %}
+            {% if other_article.id != article.id %}
+            <div class="side-article">
+                <a href="{{ url_for('main.article', article_id=other_article.id) }}" class="article-link">
+                    <div class="article-card">
+                        {% if other_article.image_url %}
+                        <div class="thumbnail">
+                            <img src="{{ other_article.image_url }}" alt="{{ other_article.title }}">
+                        </div>
+                        {% endif %}
+                        <div class="article-info">
+                            <h3 class="article-title">{{ other_article.title }}</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

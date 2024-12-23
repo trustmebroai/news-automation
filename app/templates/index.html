@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="news-layout">
+        <!-- Main Featured Article -->
+        <div class="main-article">
+            {% if featured_article %}
+            <a href="{{ url_for('main.article', article_id=featured_article.id) }}" class="featured-article-link">
+                <div class="featured-image-wrapper">
+                    <img src="{{ featured_article.image_url }}" alt="{{ featured_article.title }}" class="featured-image">
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        LIVE
+                    </div>
+                </div>
+                <h1 class="article-title">{{ featured_article.title }}</h1>
+                <p class="article-excerpt">{{ featured_article.content[:200] }}...</p>
+                <div class="article-meta">
+                    <span class="time">{{ featured_article.created_at.strftime('%H:%M') }}</span>
+                    <span class="category">World</span>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- Side News List -->
+        <div class="side-news">
+            {% for article in other_articles %}
+            <div class="side-news-item">
+                <a href="{{ url_for('main.article', article_id=article.id) }}" class="news-link">
+                    <div class="news-thumbnail">
+                        {% if article.image_url %}
+                        <img src="{{ article.image_url }}" alt="{{ article.title }}">
+                        {% endif %}
+                    </div>
+                    <div class="news-content">
+                        <h3>{{ article.title }}</h3>
+                        <div class="news-meta">
+                            <span class="time">{{ article.created_at.strftime('%H:%M') }}</span>
+                            <span class="category">World</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

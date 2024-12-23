@@ -1,0 +1,11 @@
+flask
+flask-sqlalchemy
+flask-login
+python-dotenv
+tweepy
+anthropic
+requests
+stability-sdk==0.8.5
+grpcio==1.59.3
+protobuf==4.25.1
+schedule==1.2.0
